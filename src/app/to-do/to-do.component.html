@@ -1,0 +1,24 @@
+
+<label class="list-title">Todo-List: </label>
+
+<p *ngIf="toDoTasks.length == 0">Empty...</p>
+<ul class="todo-list-container">
+  <li *ngFor="let task of tasks" [class.done]="task.done"
+      [style.display]="task.done ? 'none' : 'block'">
+      <input type="checkbox" [(ngModel)]="task.done" (click)="onCheck()">
+      <label (click)="clickLabel(task.id)" *ngIf="editIndex !== task.id">{{task.content}}</label>
+      <input (change)="null" *ngIf="editIndex == task.id" class="input-style" [defaultValue]="task.content"  (keyup.enter)="enter($event)"/>
+       <i class="bi-trash"></i>
+  </li>
+</ul>
+<label class="list-title">Completed-List: </label>
+<p *ngIf="completedTasks.length == 0">Empty...</p>
+<ul>
+  <li *ngFor="let task of tasks" [class.done]="task.done"
+      [style.display]="task.done ? 'block' : 'none'">
+    <input type="checkbox" [(ngModel)]="task.done" (click)="onCheck()">
+    <label
+    >{{task.content}}</label>
+    <i class="bi-trash"></i>
+  </li>
+</ul>
