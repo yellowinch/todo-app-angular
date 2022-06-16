@@ -39,7 +39,6 @@ export class TasksService {
   }
   init() {
     for (let i = 0; i < this.init_tasks.length; i++) {
-      console.log(this.init_tasks);
       this.tasks.push(
         new Task(
           this.init_tasks[i]['id'],
@@ -48,5 +47,20 @@ export class TasksService {
         )
       );
     }
+  }
+
+  add(newTaskContent: string) {
+    let newTask = new Task(this.getHighestId() + 1, newTaskContent, false);
+    console.log(this.getHighestId());
+    this.tasks.push(newTask);
+  }
+
+  getHighestId(): number {
+    return Math.max.apply(
+      Math,
+      this.tasks.map((item) => {
+        return item.id;
+      })
+    );
   }
 }
