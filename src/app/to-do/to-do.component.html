@@ -8,8 +8,9 @@
       <input type="checkbox" [(ngModel)]="task.done" (click)="onCheck()">
       <label (click)="clickLabel(task.id)" *ngIf="editIndex !== task.id">{{task.content}}</label>
       <input (change)="null" *ngIf="editIndex == task.id" class="input-style" [defaultValue]="task.content"  (keyup.enter)="enter($event)"/>
-       <i class="bi-trash"></i>
+      <img src="assets/images/trash_icon.png"  alt="bin-trash">
   </li>
+
 </ul>
 <label class="list-title">Completed-List: </label>
 <p *ngIf="completedTasks.length == 0">Empty...</p>
@@ -19,6 +20,6 @@
     <input type="checkbox" [(ngModel)]="task.done" (click)="onCheck()">
     <label
     >{{task.content}}</label>
-    <i class="bi-trash"></i>
+    <img src="assets/images/trash_icon.png"  alt="bin-trash">
   </li>
 </ul>
