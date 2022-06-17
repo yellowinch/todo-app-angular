@@ -7,8 +7,9 @@
       [style.display]="task.done ? 'none' : 'block'">
       <input type="checkbox" [(ngModel)]="task.done" (click)="onCheck()">
       <label (click)="clickLabel(task.id)" *ngIf="editIndex !== task.id">{{task.content}}</label>
-      <input (change)="null" *ngIf="editIndex == task.id" class="input-style" [defaultValue]="task.content"  (keyup.enter)="enter($event)"/>
-      <img src="assets/images/trash_icon.png"  alt="bin-trash">
+      <input *ngIf="editIndex == task.id" class="input-style"
+             [defaultValue]="task.content"  (keyup.enter)="enter($event,task.id)"/>
+      <img src="assets/images/trash_icon.png" (click)="deleteTask(task.id)"  alt="bin-trash">
   </li>
 
 </ul>
@@ -20,6 +21,6 @@
     <input type="checkbox" [(ngModel)]="task.done" (click)="onCheck()">
     <label
     >{{task.content}}</label>
-    <img src="assets/images/trash_icon.png"  alt="bin-trash">
+    <img src="assets/images/trash_icon.png" (click)="deleteTask(task.id)" alt="bin-trash">
   </li>
 </ul>

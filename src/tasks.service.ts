@@ -15,7 +15,7 @@ export class TasksService {
     {
       id: 2,
       content: 'Wash car',
-      done: true,
+      done: false,
     },
     {
       id: 3,
@@ -62,5 +62,30 @@ export class TasksService {
         return item.id;
       })
     );
+  }
+
+  delete(id: number) {
+    // this.tasks.splice(
+    //   this.tasks.findIndex((task) => task.id === id),
+    //   1
+    // );
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+    console.log('this.tasks in service', this.tasks);
+  }
+
+  edit(id: number, content: string) {
+    let filteredTask = this.getTaskById(id);
+    if (filteredTask.length == 0) {
+      return;
+    }
+    let editedTask = filteredTask[0];
+    editedTask.content = content;
+    this.tasks = this.tasks.map((t) => {
+      return t.id === editedTask.id ? editedTask : t;
+    });
+  }
+
+  getTaskById(id: number): Task[] {
+    return this.tasks.filter((task) => task.id == id);
   }
 }

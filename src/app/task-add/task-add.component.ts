@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TasksService } from '../../tasks.service';
 
 @Component({
@@ -7,9 +7,9 @@ import { TasksService } from '../../tasks.service';
   styleUrls: ['./task-add.component.scss'],
 })
 export class TaskAddComponent implements OnInit {
+  @Output() myEvent = new EventEmitter();
   newTaskContent = '';
   constructor(private taskService: TasksService) {}
-
   ngOnInit(): void {}
   onKey(event: any) {
     this.newTaskContent = event.target.value;
@@ -17,5 +17,9 @@ export class TaskAddComponent implements OnInit {
 
   addTask() {
     this.taskService.add(this.newTaskContent);
+  }
+
+  changeTaskLength() {
+    this.myEvent.emit();
   }
 }
