@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { TasksService } from '../../tasks.service';
+import { TasksService } from '../../../../tasks.service';
 
 @Component({
   selector: 'app-task-add',
@@ -7,19 +7,19 @@ import { TasksService } from '../../tasks.service';
   styleUrls: ['./task-add.component.scss'],
 })
 export class TaskAddComponent implements OnInit {
-  @Output() myEvent = new EventEmitter();
+  @Output() check = new EventEmitter();
   newTaskContent = '';
   constructor(private taskService: TasksService) {}
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
   onKey(event: any) {
     this.newTaskContent = event.target.value;
   }
 
   addTask() {
     this.taskService.add(this.newTaskContent);
-  }
-
-  changeTaskLength() {
-    this.myEvent.emit();
+    this.check.emit();
   }
 }

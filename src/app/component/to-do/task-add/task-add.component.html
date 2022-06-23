@@ -1,8 +1,7 @@
 <section class="input-section">
   <input type="text" placeholder="Enter your todo item" id="todo-input"
   (keyup)="onKey($event)"/>
-  <button type="button" id="add-todo" (click)="addTask();child.onCheck()">
+  <button type="button" id="add-todo" (click)="addTask();">
    十
   </button>
 </section>
-<app-to-do #child></app-to-do>

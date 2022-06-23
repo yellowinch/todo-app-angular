@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Task } from '../shared/task.model';
-import { TasksService } from '../../tasks.service';
+import { Task } from '../../shared/task.model';
+import { TasksService } from '../../../tasks.service';
 
 @Component({
   selector: 'app-to-do',
@@ -26,8 +26,8 @@ export class ToDoComponent implements OnInit {
     setTimeout(() => {
       this.toDoTasks = this.tasks.filter((task) => !task.done);
       this.completedTasks = this.tasks.filter((task) => task.done);
+      console.log('this.completedTasks ', this.completedTasks);
     }, 0);
-    console.log('completedTasks', this.completedTasks.length);
   }
 
   clickLabel(id: number) {
