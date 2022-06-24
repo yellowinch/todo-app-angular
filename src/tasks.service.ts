@@ -9,28 +9,28 @@ export class TasksService {
   init_tasks: Task[] = [
     {
       id: 1,
-      content: 'Mow lawn',
-      done: false,
+      name: 'Mow lawn',
+      completed: false,
     },
     {
       id: 2,
-      content: 'Wash car',
-      done: false,
+      name: 'Wash car',
+      completed: false,
     },
     {
       id: 3,
-      content: 'Buy groceries',
-      done: false,
+      name: 'Buy groceries',
+      completed: false,
     },
     {
       id: 4,
-      content: 'Add validation',
-      done: true,
+      name: 'Add validation',
+      completed: true,
     },
     {
       id: 5,
-      content: 'Add tests for frontend',
-      done: false,
+      name: 'Add tests for frontend',
+      completed: false,
     },
   ];
   tasks: Task[] = [];
@@ -38,13 +38,9 @@ export class TasksService {
     return this.tasks;
   }
   init() {
-    for (let i = 0; i < this.init_tasks.length; i++) {
+    for (const element of this.init_tasks) {
       this.tasks.push(
-        new Task(
-          this.init_tasks[i]['id'],
-          this.init_tasks[i]['content'],
-          this.init_tasks[i]['done']
-        )
+        new Task(element['id'], element['name'], element['completed'])
       );
     }
   }
@@ -65,10 +61,6 @@ export class TasksService {
   }
 
   delete(id: number) {
-    // this.tasks.splice(
-    //   this.tasks.findIndex((task) => task.id === id),
-    //   1
-    // );
     this.tasks = this.tasks.filter((task) => task.id !== id);
     console.log('this.tasks in service', this.tasks);
   }
@@ -79,7 +71,7 @@ export class TasksService {
       return;
     }
     let editedTask = filteredTask[0];
-    editedTask.content = content;
+    editedTask.name = content;
     this.tasks = this.tasks.map((t) => {
       return t.id === editedTask.id ? editedTask : t;
     });

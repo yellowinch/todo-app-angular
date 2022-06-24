@@ -1,25 +1,46 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Output, EventEmitter, Component } from '@angular/core';
 import { TasksService } from '../../../../tasks.service';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+const httpOptions = {
+  headers: new HttpHeaders({ 'content-Type': 'application/json' }),
+};
 @Component({
   selector: 'app-task-add',
   templateUrl: './task-add.component.html',
   styleUrls: ['./task-add.component.scss'],
 })
-export class TaskAddComponent implements OnInit {
+export class TaskAddComponent {
+  private serviceUrl = 'http://127.0.0.1:8080/tasks';
   @Output() check = new EventEmitter();
+  @Output() getTasks = new EventEmitter();
   newTaskContent = '';
-  constructor(private taskService: TasksService) {}
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  constructor(
+    private taskService: TasksService,
+    private httpClient: HttpClient
+  ) {}
   onKey(event: any) {
     this.newTaskContent = event.target.value;
   }
 
-  addTask() {
-    this.taskService.add(this.newTaskContent);
+  add(taskContent: string): Observable<string> {
+    return this.httpClient.post<string>(
+      this.serviceUrl,
+      {
+        name: taskContent,
+      },
+      httpOptions
+    );
+  }
+  addTask(): void {
+    if (!this.newTaskContent) {
+      return;
+    }
+    this.add(this.newTaskContent).subscribe((res) => {
+      if (!!res) {
+        this.getTasks.emit();
+      }
+    });
     this.check.emit();
   }
 }
