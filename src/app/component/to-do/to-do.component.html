@@ -1,27 +1,25 @@
-<app-task-add (check)="onCheck()" (getTasks)="findTaskList()"> </app-task-add>
+<app-task-add (check)="onCheck()" (getTasks)="findTaskList()"></app-task-add>
 <label class="list-title">Todo-List: </label>
 <p *ngIf="toDoTasks.length == 0">Empty...</p>
 <ul class="list-container">
-  <li *ngFor="let task of tasks" [class.completed]="task.done"
-      [style.display]="task.done ? 'none' : 'block'">
-      <input type="checkbox" [(ngModel)]="task.done" (click)="onCheck()">
-      <label (click)="clickLabel(task.id,task)" *ngIf="editIndex !== task.id">{{task.name}}</label>
-      <input *ngIf="editIndex == task.id" class="input-style"
-             [defaultValue]="task.name"  (keyup.enter)="enter($event,task.id)"/>
-      <img src="../../../assets/images/trash_icon.png" (click)="deleteTask(task)" alt="bin-trash">
+  <li *ngFor="let task of toDoTasks">
+    <input type="checkbox" [(ngModel)]="task.completed" (click)="changeTaskState(task.id,task)">
+    <label (click)="clickLabel(task.id,task)" *ngIf="editIndex !== task.id">{{task.name}}</label>
+    <input *ngIf="editIndex == task.id" class="input-style"
+           [defaultValue]="task.name" (keyup.enter)="editTask($event,task.id)"/>
+    <img src="../../../assets/images/trash_icon.png" (click)="deleteTask(task)" alt="bin-trash">
   </li>
 
-</ul >
+</ul>
 <label class="list-title">Completed-List: </label>
 <p *ngIf="completedTasks.length == 0">Empty...</p>
-<ul  class="list-container">
-  <li *ngFor="let task of tasks" [class.completed]="task.done"
-      [style.display]="task.done ? 'block' : 'none'">
-    <input type="checkbox" [(ngModel)]="task.done" (click)="onCheck()">
-    <label  (click)="clickLabel(task.id,task)" *ngIf="editIndex !== task.id"
+<ul class="list-container">
+  <li *ngFor="let task of completedTasks">
+    <input type="checkbox" [(ngModel)]="task.completed" (click)="changeTaskState(task.id,task)">
+    <label (click)="clickLabel(task.id,task)" *ngIf="editIndex !== task.id"
     >{{task.name}}</label>
     <input *ngIf="editIndex == task.id" class="input-style"
-                                 [defaultValue]="task.name"  (keyup.enter)="enter($event,task.id)"/>
+           [defaultValue]="task.name" (keyup.enter)="editTask($event,task.id)"/>
     <img src="../../../assets/images/trash_icon.png" (click)="deleteTask(task)" alt="bin-trash">
   </li>
 </ul>

@@ -1,10 +1,11 @@
-import { Output, EventEmitter, Component } from '@angular/core';
-import { TasksService } from '../../../../tasks.service';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'content-Type': 'application/json' }),
 };
+
 @Component({
   selector: 'app-task-add',
   templateUrl: './task-add.component.html',
@@ -15,10 +16,9 @@ export class TaskAddComponent {
   @Output() check = new EventEmitter();
   @Output() getTasks = new EventEmitter();
   newTaskContent = '';
-  constructor(
-    private taskService: TasksService,
-    private httpClient: HttpClient
-  ) {}
+
+  constructor(private httpClient: HttpClient) {}
+
   onKey(event: any) {
     this.newTaskContent = event.target.value;
   }
@@ -32,6 +32,7 @@ export class TaskAddComponent {
       httpOptions
     );
   }
+
   addTask(): void {
     if (!this.newTaskContent) {
       return;

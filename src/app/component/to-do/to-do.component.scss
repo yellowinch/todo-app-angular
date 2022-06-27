@@ -4,8 +4,8 @@
   font-weight: bold;
   padding: 4px;
 }
+
 li {
-  display: flex;
   align-items: center;
   list-style: none;
   height: 2.5rem;
@@ -27,15 +27,16 @@ li {
       text-decoration: line-through;
     }
   }
-  img{
+
+  img {
     margin-top: 12px;
-    width:17px;
-    height:15px;
+    width: 17px;
+    height: 15px;
     align-items: center;
     margin-left: 0.5rem;
     color: lightblue;
     align-content: center;
-    float:right;
+    float: right;
   }
 }
 
@@ -45,16 +46,19 @@ li {
     background: none;
     font-size: 18px;
     color: #333333;
+
     &:focus {
       outline: none;
     }
   }
 }
-p{
+
+p {
   font-size: 18px;
   margin-left: 45px;
 }
-.list-title{
+
+.list-title {
   font-size: 20px;
   font-weight: bold;
   color: #807d7d;
